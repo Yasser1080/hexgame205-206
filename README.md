@@ -2,6 +2,6 @@
 
 HexGame
 
-Dhia Eddine SOUISSI
-Yasser IBOUDA
-Maryam BINT IBRAHIM
+Dhia Eddine SOUISSI 205
+Yasser IBOUDA 206
+Maryam BINT IBRAHIM 205
