@@ -1,4 +1,4 @@
-package sources.hex;
+package Plateau_Pion;
 
 import java.time.format.TextStyle;
 
@@ -135,7 +135,7 @@ public class Plateau {
 		return lignes;
 		
 	}
-	
+	//Vérifie si toutes les cases sont remplies ou si l'un des joueurs a gagné
 	public boolean jeu_fini() {
 		boolean estfini = false;
 		for (int lig = 0; lig < taille(); ++lig) {

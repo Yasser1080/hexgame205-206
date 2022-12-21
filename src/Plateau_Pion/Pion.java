@@ -1,4 +1,4 @@
-package sources.hex;
+package Plateau_Pion;
 
 public enum Pion {
 	Croix('X'), Rond('O'), Vide('.');

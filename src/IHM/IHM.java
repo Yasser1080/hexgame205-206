@@ -2,7 +2,8 @@ package IHM;
 
 import java.util.Scanner;
 
-import sources.hex.Plateau;
+import Jeu.Regles;
+import Plateau_Pion.Plateau;
 
 public class IHM {
 	
@@ -10,32 +11,40 @@ public class IHM {
 		
 		Plateau p = new Plateau(6);
 		IHM ihm = new IHM();
-		ihm.jouer_coup(p);;
+		Regles r = new Regles();
+		ihm.jouer(p);
 	}
 	
 	public IHM() {
 		
 	}
 	
-	public void jouer_coup(Plateau p) {
-		
-	    while(p.jeu_fini() == false) {
-			for(int i = 0; i < p.taille(); i++) {
-				System.out.println(p);
-				Scanner sc = new Scanner(System.in);
-			    System.out.println("Saisissez une lettre et un numéro de case : ");
-			    String str = sc.nextLine();
-			    p.jouer(str);
-			    System.out.println(p);
-			}
+//	public void jouer(Plateau p) {
+//		try {
+//			for(int i = 0; i < p.taille(); i++)
+//					jouer_partie(p);
+//		}
+//	    catch(Exception e) {
+//				for(int i = 0; i < p.taille(); i++) {
+//			    	System.out.println("Vous jouez en dehors du plateau, veuillez ressaisir un coup :");
+//			    	jouer_partie(p);
+//				}
+//			}
+//		jouer_partie(p);
+//	    }
+	
+	
+	public void jouer(Plateau p) {
+		try {
+			System.out.println(p);
+			Scanner sc = new Scanner(System.in);
+		    System.out.println("Saisissez une lettre et un numéro de case : ");
+		    String str = sc.nextLine();
+		    p.jouer(str);
+		    System.out.println(p);
+		}
+		catch(Exception e) {
+			System.out.println("Vous jouez en dehors du plateau, rejouez");
 		}
 	}
-	
-//	public void jouer_partie(Plateau p) {
-//		while(p.jeu_fini() == false) {
-//			for(int i = 0; i < p.taille(); i++) {
-//				jouer_coup(p);
-//			}
-//		}
-//	}
 }
