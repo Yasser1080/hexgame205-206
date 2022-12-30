@@ -1,8 +1,7 @@
 package IHM;
 
 public interface IJoueur {
-	
-	String getNom();
-    Integer getScore();
-    
+   String getNom();
+   char getType();
+   String jouer_coup();
 }

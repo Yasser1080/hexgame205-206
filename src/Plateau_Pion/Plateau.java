@@ -2,11 +2,13 @@ package Plateau_Pion;
 
 import java.time.format.TextStyle;
 
-public class Plateau {
+import IHM.IPlateau;
+
+public class Plateau implements IPlateau {
 	private final static int TAILLE_MAX = 26;
+
 	private final static int NB_JOUEURS = 2;
-	private final static int PREMIERE_COLONNE = 'A';
-	private final static int PREMIERE_LIGNE = '1';
+
 	
 	// le premier joueur relie la première et la dernière ligne
 	// le premier joueur relie la première et la dernière colonne
@@ -17,55 +19,53 @@ public class Plateau {
 	private void suivant() {
 		joueur = (joueur +1) % NB_JOUEURS;
 	}
-	
+
+	public Pion[][] getT() {
+		return t;
+	}
+	// verifier qu'une case est occupée
+	@Override
+	public void verif_coup(String coord) {
+		Coord c = new Coord(coord);
+		int col = c.getColonne();
+		int lig = c.getLigne();
+		if(t[col][lig] != Pion.Vide) {
+			throw new IllegalArgumentException(
+					"position occupée");
+		}
+	}
+	@Override
 	public void jouer(String coord) {
-		assert estValide(coord);
-		assert getCase(coord) == Pion.Vide;
+		Coord c = new Coord(coord);
+		assert c.estValide(taille());
+		assert getCase(c) == Pion.Vide;
 		Pion pion = Pion.values()[joueur];
-		int col = getColonne (coord);
-		int lig = getLigne(coord);
+		int col = c.getColonne();
+		int lig = c.getLigne();
+		System.err.println(col);
+		verif_coup(coord);
 		t[col][lig] = pion;
 		suivant();
 	}
-	
 	public static int getTaille(String pos) {
 		int taille = (int) Math.sqrt(pos.length());
 		assert taille * taille == pos.length();
 		return taille;
 	}
 
-	public boolean estValide(String coord) {
-		if ( coord.length() !=2)
-			return false;
-		int col = getColonne (coord);
-		int lig = getLigne(coord);
-		System.out.println(coord + " "+ col+ " "+ lig);
-		if (col <0 || col >= taille())
-			return false;
-		if (lig <0 || lig >= taille())
-			return false;
-		return true;
-	}
 	
-	public Pion getCase(String coord) {
-		assert estValide(coord);
-		int col = getColonne (coord);
-		int lig = getLigne(coord);
+	public Pion getCase(Coord coord) {
+		assert coord.estValide(taille());
+		int col =coord.getColonne ();
+		int lig =coord.getLigne();
 		return t[col][lig];
 	}
 
-	private int getColonne(String coord) {
-		return coord.charAt(0) - PREMIERE_COLONNE; // ex 'B' -'A' == 1
-	}
-	
-	private int getLigne(String coord) {
-		return coord.charAt(1) - PREMIERE_LIGNE; // ex '2' - '1' == 1
-	}
 
 	public Plateau(int taille) {
 		assert taille > 0 && taille <= TAILLE_MAX;
 		t = new Pion [taille][taille];
-		
+
 		for (int lig = 0; lig < taille(); ++lig)
 			for (int col = 0; col < taille(); ++col)
 				t[col][lig] = Pion.Vide;
@@ -90,7 +90,8 @@ public class Plateau {
 	}
 	
 	
-
+	
+	@Override
 	public int getNb(Pion pion) {
 		int nb = 0;
 		for (Pion [] ligne : t)
@@ -99,7 +100,7 @@ public class Plateau {
 					++nb;
 		return nb;
 	}
-
+	@Override
 	public int taille() {
 		return t.length;
 	}
@@ -111,6 +112,9 @@ public class Plateau {
 			s+= " ";
 		return s;
 	}
+
+
+
 	@Override
 	public String toString() {
 		String s = "";
@@ -125,7 +129,6 @@ public class Plateau {
 		}
 		return s;
 	}
-
 	public static String[] decouper(String pos) {
 		int taille = getTaille(pos);
 		String[] lignes = new String[taille];
@@ -135,17 +138,8 @@ public class Plateau {
 		return lignes;
 		
 	}
-	//Vérifie si toutes les cases sont remplies ou si l'un des joueurs a gagné
-	public boolean jeu_fini() {
-		boolean estfini = false;
-		for (int lig = 0; lig < taille(); ++lig) {
-			for (int col = 0; col < taille(); ++col) {
-				if (!t[col][lig].equals(Pion.Vide) ) {
-					estfini = true;
-				}
-			}
-				
-		}
-		return estfini;
-	}
+	
+
+
+	
 }

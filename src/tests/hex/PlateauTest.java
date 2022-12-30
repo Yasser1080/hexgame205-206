@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import Plateau_Pion.Coord;
 import Plateau_Pion.Pion;
 import Plateau_Pion.Plateau;
 
@@ -37,11 +38,11 @@ class PlateauTest {
 	
 		// jouer un coup en B2
 		p.jouer("B2");
-		assertEquals(Pion.Croix, p.getCase("B2"));
+		assertEquals(Pion.Croix, p.getCase(new Coord("B2")));
 		System.out.println(p);
 		
 		p.jouer("C2");
-		assertEquals(Pion.Rond, p.getCase("C2"));
+		assertEquals(Pion.Rond, p.getCase(new Coord("C2")));
 		System.out.println(p);
 		
 	}
