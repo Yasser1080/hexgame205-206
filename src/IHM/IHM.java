@@ -11,6 +11,7 @@ public class IHM {
 //		String c = "Z";
 //		
 //		System.out.println(c.charAt(0) - 'A');
+		System.out.println("Bienvenue dans le jeu Hex !");
 		Scanner taille_tab = new Scanner(System.in);
 		System.out.println("Choisissez la taille de votre plateau :");
 		Integer taille = Integer.valueOf(taille_tab.nextLine());
@@ -21,7 +22,7 @@ public class IHM {
 			try {
 				System.out.println(p);
 				Scanner sc = new Scanner(System.in);
-				System.out.println("Saisissez une lettre et un numéro de case : ");
+				System.out.println("Saisissez une lettre et un numÃ©ro de case : ");
 				String str = sc.nextLine();
 				p.verif_coup(str);
 				p.jouer(str);
@@ -29,7 +30,7 @@ public class IHM {
 				//System.out.println(p);
 			}
 			catch(Exception e) {
-				System.out.println("Vous jouez en dehors du plateau, ou sur une case occupée, veuillez rejouez !");
+				System.out.println("Vous jouez en dehors du plateau, ou sur une case occupÃ©e, veuillez rejouez !");
 			}
 		}
 
