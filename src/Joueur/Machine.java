@@ -1,41 +1,47 @@
 package Joueur;
 
 import java.util.Random;
+import java.util.Scanner;
 
-import IHM.IJoueur;
+import Jeu.IJoueur;
+import Jeu.IPlateau;
 
-public class Machine implements IJoueur{
-	private int cpt = 0;
+
+
+public class Machine implements IJoueur {
+	
+	private static int cpt = 0;
 	private char type = 'M';
+	private String nom;
+	
+	public Machine() {
+		nom = "M" + cpt++;
+	}
 	
 	@Override
 	public String getNom() {
-		// TODO Auto-generated method stub
-		return "Joueur " + cpt;
+		return nom;
 	}
 
 	@Override
 	public char getType() {
-		// TODO Auto-generated method stub
 		return type;
 	}
-
-	private static int getRandomNumberInRange(int min, int max) {
-
-		if (min >= max) {
-			throw new IllegalArgumentException("max must be greater than min");
-		}
-
-		Random r = new Random();
-		return r.nextInt((max - min) + 1) + min;
-	}
-	@Override
-	public String jouer_coup() {
-		// TODO Auto-generated method stub
-		getRandomNumberInRange(0,taille);
-		return null;
-	}
 	
+	@Override
+	public String coup_joueur(IPlateau p, int taille, Scanner sc) {
+		int a1;
+		int a2;
+		char a1c;
+		do {
+			a1 = (int) (Math.random() * (taille-1))+1;
+			a2 = (int) (Math.random() * (taille-1))+1;
+			a1c = (char)(a1 +'A') ;
+		}while (!p.verif_coup(""+a1c+a2));
+		return "" + a1c+a2 ;
+	}
+
+
 	
 	
 }

@@ -1,6 +1,5 @@
 package IHM;
 
 public interface IPartie {
-	boolean EstFini();
-	boolean EstGagne();
+	void lancer_partie(int choix);
 }

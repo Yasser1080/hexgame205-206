@@ -1,11 +1,10 @@
 package tests.hex;
+import Plateau_Pion.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-
-import Plateau_Pion.Pion;
-
+import Plateau_Pion.*;
 class PionTest {
 
 	@Test

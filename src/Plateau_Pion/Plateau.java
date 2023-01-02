@@ -1,8 +1,7 @@
 package Plateau_Pion;
 
-import java.time.format.TextStyle;
+import Jeu.IPlateau;
 
-import IHM.IPlateau;
 
 public class Plateau implements IPlateau {
 	private final static int TAILLE_MAX = 26;
@@ -10,11 +9,11 @@ public class Plateau implements IPlateau {
 	private final static int NB_JOUEURS = 2;
 
 	
-	// le premier joueur relie la première et la dernière ligne
-	// le premier joueur relie la première et la dernière colonne
+	// le premier joueur relie la premiï¿½re et la derniï¿½re ligne
+	// le premier joueur relie la premiï¿½re et la derniï¿½re colonne
 	
 	private Pion[][] t;
-	private int joueur = 0; // prochain à jouer
+	private int joueur = 0; // prochain ï¿½ jouer
 	
 	private void suivant() {
 		joueur = (joueur +1) % NB_JOUEURS;
@@ -23,17 +22,27 @@ public class Plateau implements IPlateau {
 	public Pion[][] getT() {
 		return t;
 	}
-	// verifier qu'une case est occupée
+	// verifier qu'une case est occupï¿½e
 	@Override
-	public void verif_coup(String coord) {
+	public boolean verif_coup(String coord) {
 		Coord c = new Coord(coord);
-		int col = c.getColonne();
-		int lig = c.getLigne();
-		if(t[col][lig] != Pion.Vide) {
-			throw new IllegalArgumentException(
-					"position occupée");
+		if(c.estValide(taille())) {
+			int col = c.getColonne();
+			int lig = c.getLigne();
+			if(t[col][lig] == Pion.Vide) return true;
+			return false;
 		}
+		return false;
 	}
+//	public void verif_coup(String coord) {
+//		Coord c = new Coord(coord);
+//		int col = c.getColonne();
+//		int lig = c.getLigne();
+//		if(t[col][lig] != Pion.Vide) {
+//			throw new IllegalArgumentException(
+//					"position occupï¿½e");
+//		}
+//	}
 	@Override
 	public void jouer(String coord) {
 		Coord c = new Coord(coord);
@@ -42,7 +51,7 @@ public class Plateau implements IPlateau {
 		Pion pion = Pion.values()[joueur];
 		int col = c.getColonne();
 		int lig = c.getLigne();
-		System.err.println(col);
+
 		verif_coup(coord);
 		t[col][lig] = pion;
 		suivant();
@@ -112,7 +121,6 @@ public class Plateau implements IPlateau {
 			s+= " ";
 		return s;
 	}
-
 
 
 	@Override

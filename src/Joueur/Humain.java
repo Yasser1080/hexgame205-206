@@ -1,6 +1,9 @@
 package Joueur;
 
-import IHM.IJoueur;
+import java.util.Scanner;
+
+import Jeu.IJoueur;
+import Jeu.IPlateau;
 
 public class Humain implements IJoueur{
 	private String nom;
@@ -19,11 +22,17 @@ public class Humain implements IJoueur{
 	public char getType() {
 		return type;
 	}
+	
 	@Override
-	public String jouer_coup() {
-		// TODO Auto-generated method stub
-		return null;
+	public String coup_joueur(IPlateau p, int t, Scanner sc) {
+		String coup;
+		do{
+			System.out.print("Saisissez une lettre et un numero de case  comme par exemple A1 : ");
+			coup = sc.next();				
+		}while(!p.verif_coup(coup));
+		return coup;
 	}
+	
 
 	
 

@@ -2,12 +2,12 @@ package tests.hex;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import org.junit.jupiter.api.Test;
 
-import Plateau_Pion.Coord;
-import Plateau_Pion.Pion;
-import Plateau_Pion.Plateau;
-
+import IHM.IPartie;
+import Jeu.Partie;
+import Plateau_Pion.*;
 class PlateauTest {
 	private String pos1 = ".X..XOXXOO.OX..."; 
 	private String[] lignes1_rep = {
@@ -45,6 +45,13 @@ class PlateauTest {
 		assertEquals(Pion.Rond, p.getCase(new Coord("C2")));
 		System.out.println(p);
 		
+		// nouveaux tests
+		
+				IPartie partie = new Partie(taille);
+
+				partie.lancer_partie(0);
+				
+		
 	}
 	
 	@Test
@@ -64,5 +71,12 @@ class PlateauTest {
 		assertEquals(display_rep, p.toString());
 		
 	}
+	private void testerjeu() {
+		Partie p1 = new Partie(4);
+		
+	}
+	
+	
+	
 
 }
